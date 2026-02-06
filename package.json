@@ -1,0 +1,76 @@
+{
+  "name": "vscode-openedge-abl",
+  "displayName": "OpenEdge ABL",
+  "description": "OpenEdge ABL (LSP)",
+  "author": "Kamil Jakubus",
+  "license": "MIT",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/usagi-coffee/vscode-openedge-abl"
+  },
+  "publisher": "usagi-coffee",
+  "icon": "extra/icon.png",
+  "categories": [],
+  "keywords": [
+    "multi-root ready"
+  ],
+  "engines": {
+    "vscode": "^1.100.0"
+  },
+  "activationEvents": [
+    "onLanguage:abl",
+    "onLanguage:openedgeabl",
+    "onStartupFinished"
+  ],
+  "main": "./client/out/extension",
+  "contributes": {
+    "languages": [
+      {
+        "id": "abl",
+        "aliases": [
+          "ABL",
+          "OpenEdge ABL"
+        ],
+        "extensions": [
+          ".p",
+          ".w",
+          ".i",
+          ".cls",
+          ".abl"
+        ]
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "OpenEdge ABL",
+      "properties": {
+        "openedgeAbl.languageServerPath": {
+          "scope": "machine",
+          "type": "string",
+          "default": "",
+          "description": "Optional absolute or ~/ path to abl-language-server. When set, the extension skips GitHub release download and runs this binary."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -b",
+    "watch": "tsc -b -w",
+    "lint": "eslint",
+    "package": "bunx @vscode/vsce package",
+    "postinstall": "cd client && npm install && cd ..",
+    "test": "npm run compile"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "@stylistic/eslint-plugin": "^2.9.0",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^22",
+    "eslint": "^9.13.0",
+    "mocha": "^10.3.0",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.39.0"
+  }
+}
