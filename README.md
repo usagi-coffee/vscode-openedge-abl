@@ -1,6 +1,8 @@
 # VS Code OpenEdge ABL Wrapper
 
-Thin VS Code extension wrapper for [`usagi-coffee/abl-language-server`](https://github.com/usagi-coffee/abl-language-server).
+Thin VS Code extension for [`usagi-coffee/abl-language-server`](https://github.com/usagi-coffee/abl-language-server)
+
+For LSP features check feature section in [`usagi-coffee/abl-language-server`](https://github.com/usagi-coffee/abl-language-server). 
 
 ## How it works
 
@@ -20,8 +22,3 @@ Example:
 }
 ```
 
-## Development
-
-- Run `npm install`
-- Open this repository in VS Code
-- Run the `Launch Client` debug target (F5)
