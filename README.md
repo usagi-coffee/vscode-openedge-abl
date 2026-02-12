@@ -3,9 +3,9 @@
 ABL Language support for OpenEdge ABL.
 
 - LSP Server: [`usagi-coffee/abl-language-server`](https://github.com/usagi-coffee/abl-language-server)
-- `ABL` grammar: [`usagi-coffee/abl-language-server`](https://github.com/usagi-coffee/tree-sitter-abl)
+- `ABL` grammar: [`usagi-coffee/tree-sitter-abl`](https://github.com/usagi-coffee/tree-sitter-abl)
 - `ABL` syntax highlighting: [`abl-tmlanguage`](https://github.com/chriscamicas/abl-tmlanguage)
-- `DF` grammar: [`usagi-coffee/abl-language-server`](https://github.com/usagi-coffee/tree-sitter-abl)
+- `DF` grammar: [`usagi-coffee/tree-sitter-df`](https://github.com/usagi-coffee/tree-sitter-df)
 - `DF` syntax higlighting: quick textmate sketch based on `DF` tree-sitter grammar.
 
 For LSP features check feature section in [`usagi-coffee/abl-language-server`](https://github.com/usagi-coffee/abl-language-server). 
