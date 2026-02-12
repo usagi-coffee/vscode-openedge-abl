@@ -1,0 +1,120 @@
+{
+  "name": "OpenEdge DF",
+  "scopeName": "source.df",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#statements"
+    },
+    {
+      "include": "#attributes"
+    },
+    {
+      "include": "#types"
+    },
+    {
+      "include": "#literals"
+    },
+    {
+      "include": "#numbers"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.block.df",
+          "begin": "/\\*",
+          "end": "\\*/"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.df",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.df",
+              "match": "\\\\."
+            },
+            {
+              "name": "constant.character.escape.df",
+              "match": "\"\""
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.df",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.df",
+              "match": "\\\\."
+            },
+            {
+              "name": "constant.character.escape.df",
+              "match": "''"
+            }
+          ]
+        }
+      ]
+    },
+    "statements": {
+      "patterns": [
+        {
+          "name": "keyword.control.statement.df",
+          "match": "(?i)\\b(ADD|TABLE|FIELD|INDEX|SEQUENCE|ON|OF|AS|END)\\b"
+        }
+      ]
+    },
+    "attributes": {
+      "patterns": [
+        {
+          "name": "keyword.other.attribute.df",
+          "match": "(?i)\\b(AREA|LABEL|DESCRIPTION|DUMP-NAME|FORMAT|INITIAL|POSITION|MAX-WIDTH|COLUMN-LABEL|COLUMN|ORDER|DECIMALS|EXTENT|VALEXP|VALMSG|VALMSG-SA|HELP|LOB-AREA|LOB-BYTES|LOB-SIZE|CLOB-CODEPAGE|CLOB-COLLATION|CLOB-TYPE|MANDATORY|CASE-SENSITIVE|UNIQUE|PRIMARY|INDEX-FIELD|ASCENDING|DESCENDING|ASC|DESC|ABBREVIATED|CAN-CREATE|CAN-DELETE|CAN-READ|CAN-WRITE|CAN-DUMP|CAN-LOAD|TABLE-TRIGGER|OVERRIDE|NO-OVERRIDE|PROCEDURE|CRC|FROZEN|INCREMENT|CYCLE-ON-LIMIT|MIN-VAL|MAX-VAL)\\b"
+        }
+      ]
+    },
+    "types": {
+      "patterns": [
+        {
+          "name": "storage.type.df",
+          "match": "(?i)\\b(LOGICAL|INTEGER|INT|CHARACTER|CHAR|DECIMAL|DATE|DATETIME|DATETIME-TZ|INT64|LONGCHAR|MEMPTR|RAW|RECID|ROWID|HANDLE|COM-HANDLE|BLOB|CLOB)\\b"
+        }
+      ]
+    },
+    "literals": {
+      "patterns": [
+        {
+          "name": "constant.language.boolean.df",
+          "match": "(?i)\\b(TRUE|FALSE|YES|NO)\\b"
+        },
+        {
+          "name": "constant.language.null.df",
+          "match": "\\?"
+        },
+        {
+          "name": "keyword.other.footer.df",
+          "match": "(?i)\\b(PSC|CPSTREAM)\\b"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.df",
+          "match": "\\b\\d+(?:\\.\\d+)?\\b"
+        }
+      ]
+    }
+  }
+}
