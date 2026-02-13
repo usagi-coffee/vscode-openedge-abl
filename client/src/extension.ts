@@ -157,12 +157,15 @@ async function ensureLanguageServerBinary(context: ExtensionContext): Promise<st
 		throw new Error(`No release asset found for ${assetName()}`);
 	}
 
-	const versionDir = path.join(context.globalStorageUri.fsPath, `${SERVER_NAME}-${release.tag_name}`);
+	const storageDir = context.globalStorageUri.fsPath;
+	const activeVersionDirName = `${SERVER_NAME}-${release.tag_name}`;
+	const versionDir = path.join(storageDir, activeVersionDirName);
 	const executablePath = path.join(versionDir, binaryName());
 
 	await fs.mkdir(versionDir, { recursive: true });
 	try {
 		await fs.access(executablePath);
+		await cleanupOldLanguageServerVersions(storageDir, activeVersionDirName);
 		return executablePath;
 	} catch {
 		// Keep going and download
@@ -176,8 +179,36 @@ async function ensureLanguageServerBinary(context: ExtensionContext): Promise<st
 	if (os.platform() !== 'win32') {
 		await fs.chmod(executablePath, 0o755);
 	}
+	await cleanupOldLanguageServerVersions(storageDir, activeVersionDirName);
 
 	return executablePath;
+}
+
+async function cleanupOldLanguageServerVersions(storageDir: string, activeVersionDirName: string): Promise<void> {
+	const versionDirPrefix = `${SERVER_NAME}-`;
+	let entries: fsSync.Dirent[];
+	try {
+		entries = await fs.readdir(storageDir, { withFileTypes: true });
+	} catch {
+		return;
+	}
+
+	const staleVersions = entries.filter(
+		(entry) =>
+			entry.isDirectory() &&
+			entry.name.startsWith(versionDirPrefix) &&
+			entry.name !== activeVersionDirName
+	);
+
+	await Promise.all(
+		staleVersions.map(async (entry) => {
+			try {
+				await fs.rm(path.join(storageDir, entry.name), { recursive: true, force: true });
+			} catch {
+				// Best-effort cleanup: ignore stale version removal failures (e.g. locked files on Windows).
+			}
+		})
+	);
 }
 
 export async function activate(context: ExtensionContext) {
